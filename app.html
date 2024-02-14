@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Multi SSH Snippets</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="description" content="Free Multi SSH client for Desktop and Mobile.">
+<meta name="theme-color" content="#202225">	
+<meta property="og:image" content="images/icon.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="Multi SSH Snippets">
+<meta name="twitter:title" content="Multi SSH Snippets">
+<meta name="twitter:description" content="Free Multi SSH client for Desktop and Mobile.">
+<meta name="twitter:image" content="images/icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#202225">
+<meta name="apple-mobile-web-app-title" content="Multi SSH Snippets">
+<link rel="apple-touch-icon" href="images/icon.png">
+<link rel="manifest" href="assets/manifest.json">
+<link rel="profile" href="http://gmpg.org/xfn/11">
+<link rel='dns-prefetch' href='//www.google.com'/>
+<link rel='dns-prefetch' href='//www.youtube.com'/>
+<link rel='dns-prefetch' href='//player.vimeo.com'/>
+<link rel='dns-prefetch' href='//api.dmcdn.net'/>
+<link rel='dns-prefetch' href='//connect.facebook.net'/>
+<link rel='dns-prefetch' href='//player.twitch.tv'/>
+<link rel='dns-prefetch' href='//imasdk.googleapis.com'/>
+<link rel='dns-prefetch' href='//content.jwplatform.com'/>
+<link rel='dns-prefetch' href='//cdn.jsdelivr.net'/>
+<link rel='dns-prefetch' href='//s.w.org'/>
+<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.2/css/font-awesome.min.css'>
+<link rel="stylesheet" href="assets/app.css">
+<link rel="icon" href="images/icon.png">
+<link rel="stylesheet" href="public/css/xterm.css">
+<script src="public/js/xterm.js"></script>
+<script src="public/js/xterm-addon-attach.js"></script>
+<script src="public/js/xterm-addon-fit.js"></script>
+<script src="public/js/xterm-addon-web-links.js"></script>
+</head>
+<body>
+<div class="box-container">
+    <div class="overlay">
+        <div id="profile-form" class="form-wrap">
+            <form id="form-profile" autocomplete="off" onsubmit="event.preventDefault(); postData('update_profile', this);">
+                <h2>PROFILE DATA</h2>
+                <label for="profile-input-name">User Name</label>
+                <input type="text" name="profile-input-name" id="profile-input-name" value="" readonly>
+                <label for="profile-input-key">Key</label>
+                <input type="text" name="profile-input-key" id="profile-input-key" value="">
+                <div class="form-bottom">
+                    <div class="fb-left">
+                        <a href="javascript:history.back()" title="Cancel">Cancel</a>
+                    </div>
+                    <div class="fb-right">
+                        <input type="submit" value="Save" class="save-btn">
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div id="server-form" class="form-wrap">
+            <form id="form-server" autocomplete="off" onsubmit="event.preventDefault(); postData('update_server', this);">
+                <h2>ADD SERVER</h2>
+                <p class="form-status"></p>
+                <label for="server-input-header">Token</label>
+                <input type="text" name="server-input-header" id="server-input-header" placeholder="xxxxxx" required>
+                <label for="server-input-host">URL</label>
+                <textarea rows="6" name="server-input-host" id="server-input-host" placeholder="https://raw.githubusercontent.com/user/repo/folder/server.txt" required></textarea>
+                <div class="form-bottom">
+                    <div class="fb-left">
+                        <a href="javascript:history.back()" title="Cancel">Cancel</a>
+                    </div>
+                    <div class="fb-right">
+                        <input type="submit" value="Save" class="save-btn">
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div id="snippets-form" class="form-wrap">
+            <form id="form-snippets" autocomplete="off" onsubmit="event.preventDefault(); postData('update_snippets', this);">
+                <h2>ADD SNIPPETS</h2>
+                <p class="form-status"></p>
+                <label for="snippets-input-header">Token</label>
+                <input type="text" name="snippets-input-header" id="snippets-input-header" placeholder="xxxxxx" required>
+                <label for="cmd">URL</label>
+                <textarea rows="6" name="cmd" id="cmd" placeholder="https://raw.githubusercontent.com/user/repo/folder/snippets.sh" required></textarea>
+                <div class="form-bottom">
+                    <div class="fb-left">
+                        <a href="javascript:history.back()" title="Cancel">Cancel</a>
+                    </div>
+                    <div class="fb-right">
+                        <input type="submit" value="Save" class="save-btn">
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div id="edit-server-form" class="form-wrap">
+            <form id="edit-form-server" autocomplete="off" onsubmit="event.preventDefault(); postData('edit_server', this);">
+                <a href="javascript:void(0)" class="b-of-form" title="close" onclick="history.back()"><i class="fa fa-times" aria-hidden="true"></i></a>
+                <h2>SERVER DATA</h2>
+                <p class="form-status"></p>
+                <label for="edit-server-input-name">Name</label>
+                <input type="text" name="edit-server-input-name" id="edit-server-input-name" value="" readonly>
+                <label for="edit-server-input-host">Host</label>
+                <textarea rows="6" name="edit-server-input-host" id="edit-server-input-host" value="" readonly></textarea>
+            </form>
+        </div>
+        <div id="edit-snippets-form" class="form-wrap">
+            <form id="edit-form-snippets" autocomplete="off" onsubmit="event.preventDefault(); postData('edit_snippets', this);">
+                <a href="javascript:void(0)" class="b-of-form" title="close" onclick="history.back()"><i class="fa fa-times" aria-hidden="true"></i></a>
+                <h2>SNIPPETS DATA</h2>
+                <p class="form-status"></p>
+                <label for="edit-snippets-input-name">Name</label>
+                <input type="text" name="edit-snippets-input-name" id="edit-snippets-input-name" value="" readonly>
+                <label for="edit-cmd">Command</label>
+                <textarea rows="6" name="edit-cmd" id="edit-cmd" value="" readonly></textarea>
+            </form>
+        </div>
+        <div id="terminal-form" class="form-wrap">
+            <a href="javascript:void(0)" class="b-of-form" title="close" onclick="history.back()"><i class="fa fa-times" aria-hidden="true"></i></a>
+            <h2>SNIPPETS DATA</h2>
+            <div style="display:flex;background-color:#202225;height:2em;line-height:2em;margin-bottom:1em;overflow:hidden;color:#dcddde;">
+                <i class="fa fa-search" aria-hidden="true" onclick="searchSnippet()" style="margin-left:1em;cursor:pointer;line-height:inherit;"></i>
+                <input id="search-snippet" type="text" placeholder="Snippet name" style="flex:1;margin-left:1em;margin-right:1em;margin-bottom:0;margin-top:0;border:none;background:none;color:#dcddde;padding:0.8em 0.2em;outline:none;"/>
+            </div>
+            <div class="ul-wrap">
+                <div class="ul-flex">
+                    <ul id="terminal-data-list"></ul>
+                </div>
+            </div>
+        </div>
+        <div id="search-form" class="form-wrap">
+            <form id="form-search" autocomplete="off" onsubmit="event.preventDefault(); mobileSearch(this);">
+                <h2>SEARCH DATA</h2>
+                <input type="text" name="search-input-form" id="search-input-form" placeholder="search" required>
+                <div class="form-bottom">
+                    <div class="fb-left">
+                        <a href="javascript:history.back()" title="Cancel">Cancel</a>
+                    </div>
+                    <div class="fb-right">
+                        <input type="submit" value="Search" class="save-btn">
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="hidden-profile">
+            <ul>
+                <li onclick="mobileSettings()">Settings</li>
+                <li onclick="mobileLogout()">Logout</li>
+            </ul>
+        </div>
+    </div>
+    <div class="box-left">
+        <header class="profile">
+            <div class="wrap">
+                <div id="profile-img"></div>
+                <p id="profile-name"></p>
+                <i id="sg-mobile" class="fa fa-ellipsis-v" aria-hidden="true" title="Sign out" onclick="openLogOut()"></i>
+                <i id="sg-desktop" class="fa fa-sign-out" aria-hidden="true" title="Sign out" onclick="logOut()"></i>
+                <i id="pf-mobile" class="fa fa-search" aria-hidden="true" title="Settings" onclick="openSearch()"></i>
+                <i id="pf-desktop" class="fa fa-cog" aria-hidden="true" title="Settings" onclick="openSettings()"></i>
+            </div>
+        </header>
+        <div class="search">
+            <i class="fa fa-search" aria-hidden="true" onclick="searchData()"></i>
+            <input id="search-input" type="text" placeholder="Server name"/>
+        </div>
+        <div class="bar-box">
+            <ul>
+                <li>
+                    <a href="javascript:void(0)" class="bar-a active" title="ssh" rel="nofollow" onclick="openBar(this)">
+                        <i class="fa fa-television" aria-hidden="true"></i>
+                        <span>SSH</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="javascript:void(0)" class="bar-a" title="server" rel="nofollow" onclick="openBar(this)">
+                        <i class="fa fa-cloud" aria-hidden="true"></i>
+                        <span>Server</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="javascript:void(0)" class="bar-a" title="snippets" rel="nofollow" onclick="openBar(this)">
+                        <i class="fa fa-file-code-o" aria-hidden="true"></i>
+                        <span>Snippets</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="index.html" class="bar-a" title="help" rel="nofollow">
+                        <i class="fa fa-home" aria-hidden="true"></i>
+                        <span>Home</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="tab-title">
+            <div class="wrap">
+                <p id="tab-name">SSH DATA</p>
+                <i id="tab-icon-1" class="fa fa-angle-down" aria-hidden="true"></i>
+                <i id="tab-icon-2" class="fa fa-plus" aria-hidden="true" title="Add New"></i>
+            </div>
+        </div>
+        <div class="data-list">
+            <ul id="all-data-list"></ul>
+        </div>
+        <div class="hidden-add">
+            <i class="fa fa-plus" aria-hidden="true"></i>
+        </div>
+        <div class="hidden-bottom"></div>
+    </div>
+    <div class="box-right">
+        <div class="terminal-header">
+            <i id="th-desktop" class="fa fa-hashtag" aria-hidden="true"></i>
+            <i id="th-mobile" class="fa fa-arrow-left" aria-hidden="true"></i>
+            <p id="terminal-name">Multi SSH</p>
+            <i class="img-icon" aria-hidden="true"></i>
+        </div>
+        <div class="rbs-terminal">
+            <div class="terminal-wrap">
+                <div class="console-side"></div>
+                <div id="console-mid"></div>
+                <div class="console-side"></div>
+            </div>
+        </div>
+        <div class="terminal-input">
+            <div class="con-icon">
+                <i class="icon-left fa fa-plus-circle" aria-hidden="true" onclick="terminalSnippets()"></i>
+            </div>
+            <div class="con-textarea">
+                <textarea rows="1" id="terminal-cmd-input" placeholder="Command" autocomplete="off" oninput="setColorBtn();"></textarea>
+            </div>
+            <div class="con-icon">
+                <i id="terminal-submit" class="icon-right fa fa-paper-plane" aria-hidden="true" onclick="startRun()"></i>
+            </div>
+        </div>
+    </div>
+</div>
+<script src='assets/reconnecting-websocket.min.js'></script>
+<script src='assets/app.js'></script>
+</body>
+</html>
