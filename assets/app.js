@@ -90,7 +90,7 @@ function setColorBtn() {
 function fetchData(path, url, token) {
     const xhr = new XMLHttpRequest()
     try {
-        xhr.open('GET', `http://${server_ip}/${path}?url=${url}&token=${token}&key=${api_key}`, false)
+        xhr.open('GET', `https://${server_ip}/${path}?url=${url}&token=${token}&key=${api_key}`, false)
         xhr.send()
         if (xhr.status === 200) return xhr.responseText
     } catch {}
@@ -201,7 +201,7 @@ function sshClient(e, el) {
         rbs_term.style.marginLeft = '0'
         rbs_term.style.marginRight = '0'
     }
-    fetch(`http://${server_ip}:8080/term`, {
+    fetch(`https://${server_ip}:8080/term`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ 
@@ -240,7 +240,7 @@ function sshClient(e, el) {
         terminal.loadAddon(attachAddon)
         terminal.open(rbs_term);
         terminal.onResize(({cols, rows}) => {
-            fetch(`http://${server_ip}:8080/term/${term.id}/windowsize`, {
+            fetch(`https://${server_ip}:8080/term/${term.id}/windowsize`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
