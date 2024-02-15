@@ -1,3 +1,4 @@
+let server_ip = localStorage.getItem('host')
 const ws = new ReconnectingWebSocket(`wss://${server_ip}/run`)
 const media_queries = window.matchMedia('(max-width: 760px)')
 const box_left = document.querySelector('.box-left')
@@ -39,7 +40,6 @@ let search_clicked = false
 let hidden_clicked = false
 let username = localStorage.getItem('username')
 let api_key = localStorage.getItem('key')
-let server_ip = localStorage.getItem('host')
 let terminal = null
 let terminal_host = null
 let terminal_cmd = null
