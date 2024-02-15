@@ -406,7 +406,7 @@ function logOut() {
     localStorage.removeItem('username')
     localStorage.removeItem('key')
     localStorage.removeItem('host')
-    window.location.href = './index.html'
+    window.location.replace('./index.html')
 }
 
 function openLogOut() {
