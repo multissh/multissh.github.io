@@ -1,4 +1,3 @@
-const server_ip = localStorage.getItem('host')
 const ws = new ReconnectingWebSocket(`wss://${server_ip}/run`)
 const media_queries = window.matchMedia('(max-width: 760px)')
 const box_left = document.querySelector('.box-left')
@@ -40,6 +39,7 @@ let search_clicked = false
 let hidden_clicked = false
 let username = localStorage.getItem('username')
 let api_key = localStorage.getItem('key')
+let server_ip = localStorage.getItem('host')
 let terminal = null
 let terminal_host = null
 let terminal_cmd = null
@@ -369,8 +369,10 @@ function postData(url, e) {
     if (url === 'update_profile') {
         username = formData.get('profile-input-name')
         api_key = formData.get('profile-input-key')
+        server_ip = formData.get('profile-input-host')
         localStorage.setItem('username', username)
         localStorage.setItem('key', api_key)
+        localStorage.setItem('host', server_ip)
         document.querySelector('#profile-name').innerHTML = username
     } else if (url === 'update_server' || url === 'edit_server') {
         localStorage.setItem('server_token', formData.get('server-input-header'))
