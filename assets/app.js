@@ -1,5 +1,5 @@
 const server_ip = '129.146.163.49'
-const ws = new ReconnectingWebSocket(`ws://${server_ip}/run`)
+const ws = new ReconnectingWebSocket(`wss://${server_ip}/run`)
 const media_queries = window.matchMedia('(max-width: 760px)')
 const box_left = document.querySelector('.box-left')
 const box_right = document.querySelector('.box-right')
@@ -214,7 +214,7 @@ function sshClient(e, el) {
     .then(resp => resp.json())
     .then(term => {
         const attachAddon = new AttachAddon.AttachAddon(
-            new WebSocket(`ws://${server_ip}:8080/term/${term.id}/data`),
+            new WebSocket(`wss://${server_ip}:8080/term/${term.id}/data`),
             { bidirectional: true }
         )
         const fitAddon = new FitAddon.FitAddon()
