@@ -133,6 +133,8 @@ html {
         <input type="text" name="login-email" id="login-email" placeholder="username" required>
         <label for="login-key">Key</label>
         <input type="text" name="login-key" id="login-key" placeholder="api-key" required>
+        <label for="login-host">Host</label>
+        <input type="text" name="login-host" id="login-host" placeholder="ip or domain host" required>
         <br/>
         <div class="form-bottom">
           <div class="fb-left"></div>
@@ -144,13 +146,15 @@ html {
     </div>
   </div>
   <script>
-    if ('username' in sessionStorage && 'key' in sessionStorage) window.location.replace('app.html')
+    if ('username' in sessionStorage && 'key' in sessionStorage && 'host' in sessionStorage) window.location.replace('app.html')
     async function loginData(e) {
       const formData = new FormData(e)
       localStorage.setItem('username', formData.get('login-email'))
       localStorage.setItem('key', formData.get('login-key'))
+      localStorage.setItem('host', formData.get('login-host'))
       sessionStorage['username'] = formData.get('login-email')
       sessionStorage['key'] = formData.get('login-key')
+      sessionStorage['host'] = formData.get('login-host')
       e.reset()
       window.location.replace('app.html')
     }
