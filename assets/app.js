@@ -403,9 +403,9 @@ function screenSize(e) {
 }
 
 function logOut() {
-    sessionStorage.removeItem('username')
-    sessionStorage.removeItem('key')
-    sessionStorage.removeItem('host')
+    localStorage.removeItem('username')
+    localStorage.removeItem('key')
+    localStorage.removeItem('host')
     window.location.href = './index.html'
 }
 
