@@ -201,7 +201,7 @@ function sshClient(e, el) {
         rbs_term.style.marginLeft = '0'
         rbs_term.style.marginRight = '0'
     }
-    fetch(`https://${server_ip}:8080/term`, {
+    fetch(`https://${server_ip}:8443/term`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ 
@@ -214,7 +214,7 @@ function sshClient(e, el) {
     .then(resp => resp.json())
     .then(term => {
         const attachAddon = new AttachAddon.AttachAddon(
-            new WebSocket(`wss://${server_ip}:8080/term/${term.id}/data`),
+            new WebSocket(`wss://${server_ip}:8443/term/${term.id}/data`),
             { bidirectional: true }
         )
         const fitAddon = new FitAddon.FitAddon()
