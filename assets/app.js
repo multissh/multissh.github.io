@@ -1,4 +1,4 @@
-const server_ip = '129.146.163.49'
+const server_ip = localStorage.getItem('host')
 const ws = new ReconnectingWebSocket(`wss://${server_ip}/run`)
 const media_queries = window.matchMedia('(max-width: 760px)')
 const box_left = document.querySelector('.box-left')
@@ -403,6 +403,7 @@ function screenSize(e) {
 function logOut() {
     sessionStorage.removeItem('username')
     sessionStorage.removeItem('key')
+    sessionStorage.removeItem('host')
     window.location.href = './index.html'
 }
 
