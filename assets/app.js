@@ -443,6 +443,7 @@ function openSettings() {
     profile_clicked = true
     document.querySelector('#profile-input-name').value = username
     document.querySelector('#profile-input-key').value = api_key
+    document.querySelector('#profile-input-host').value = server_ip
     overlay_div.style.display = 'flex'
     profile_form.style.display = 'inline-block'
     if (tab_name.innerHTML === 'SSH DATA') {
