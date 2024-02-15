@@ -113,7 +113,7 @@ function getData(url) {
             let h = ''
             for (const r of row) {
                 if (r === '') continue
-                if (r.includes('#')) {
+                if (r.includes('# ')) {
                     n = r.replace('# ', '')
                 } else {
                     h += `${r}\n`
