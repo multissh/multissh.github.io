@@ -20,7 +20,7 @@
         "sizes": "512x512",
         "type": "image/png"
       }],
-    "start_url": "login.html",
+    "start_url": "../login.html",
     "display": "standalone",
     "orientation": "portrait",
     "background_color": "#202225",
