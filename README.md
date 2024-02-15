@@ -1,5 +1,6 @@
 # multissh.github.io
 
+![Website](https://img.shields.io/website?url=https%3A%2F%2Fmultissh.github.io&up_message=online&down_message=offline&logo=googlechrome&label=demo%20website)
 ![GitHub](https://img.shields.io/github/license/multissh/multissh.github.io)
 
 MultiSSH is a webtool that allows you to manage multiple SSH connections simultaneously. Free Multi SSH client for Desktop and Mobile.
@@ -35,6 +36,28 @@ Follow these steps to get started with MultiSSH:
     - URL: `https://raw.githubusercontent.com/multissh/repo/main/multissh/server.txt`
 3. Click on the "Save" button to add the server.
 
+### Server Configuration Format
+The `server.txt` file is used to configure the servers that the application will connect to. Each server is represented by one or more lines in the file. 
+
+server.txt format:
+
+```txt
+# [Server Name]
+[username]:[password]||[ip address]:[port]
+```
+
+Here's an example configuration:
+```
+# vps1
+root:xxxxx||127.0.0.1:22
+root:xxxxx||127.0.0.1:22
+
+# vps2
+root:xxxxx||127.0.0.1:22
+```
+
+In this example, the application will connect to three servers. The first two servers are grouped under the name "vps1", and the third server is named "vps2". All servers use the username "root" and the password "password123" for authentication. just create on your private repos
+
 ### Add Snippet
 ![Snippet Setup](https://i.imgur.com/8aPvKor.png)
 
@@ -43,6 +66,24 @@ Follow these steps to get started with MultiSSH:
     - Token: `ghp_xxxxxx`
     - URL: `https://raw.githubusercontent.com/multissh/repo/main/multissh/snippets.sh`
 3. Click on the "Save" button to add the snippet.
+
+### snippets.sh Format
+The `snippets.sh` file is used to define the snippets that the application will execute. Each snippet is represented by one or more lines in the file.
+
+snippets.sh format :
+```sh
+# [Snippet Name]
+[Command]
+```
+example configuration with two snippets:
+```sh
+# uptime
+uptime
+
+# check screen
+screen -ls
+```
+Please note that the actual commands you can use depend on the server's operating system and the installed software. Make sure to test your snippets before adding them to the snippets.sh file.
 
 Now you're ready to start using MultiSSH!
 
