@@ -1,6 +1,6 @@
 const OFFLINE_VERSION = 6;
 const CACHE_NAME = "multissh-cache";
-const OFFLINE_URL = "offline.html";
+const OFFLINE_URL = "./offline.html";
 
 self.addEventListener("install", (event) => {
   event.waitUntil(
