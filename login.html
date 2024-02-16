@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <title>Multi SSH Snippets</title>
 <meta charset="UTF-8">
@@ -146,15 +146,12 @@ html {
     </div>
   </div>
   <script>
-    if ('username' in sessionStorage && 'key' in sessionStorage && 'host' in sessionStorage) window.location.replace('app.html')
+    if ('username' in localStorage && 'key' in localStorage && 'host' in localStorage) window.location.replace('app.html')
     async function loginData(e) {
       const formData = new FormData(e)
       localStorage.setItem('username', formData.get('login-email'))
       localStorage.setItem('key', formData.get('login-key'))
       localStorage.setItem('host', formData.get('login-host'))
-      sessionStorage['username'] = formData.get('login-email')
-      sessionStorage['key'] = formData.get('login-key')
-      sessionStorage['host'] = formData.get('login-host')
       e.reset()
       window.location.replace('app.html')
     }
