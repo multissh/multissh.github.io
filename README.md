@@ -27,6 +27,8 @@ Follow these steps to get started with MultiSSH:
     - Key: `dTAu1iOvOfxQ63BZsYQpDqvyHMjeD8itjZ7GTs`
 4. Click on the "Sign In" button to log in.
 
+- To generate a key, you can build your own instance of [server-multissh](https://github.com/multissh/server-multissh). Follow the instructions in the repository to set up and configure your server.
+
 ### Add Server
 ![Server Setup](https://i.imgur.com/B1625qm.png)
 
