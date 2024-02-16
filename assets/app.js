@@ -406,8 +406,8 @@ function logOut() {
     localStorage.removeItem('username')
     localStorage.removeItem('key')
     localStorage.removeItem('host')
-    history.go(2-history.length)
-    window.location.replace('./index.html')
+    history.go(-1)
+    window.location.replace('login.html')
 }
 
 function openLogOut() {
@@ -686,6 +686,7 @@ function mobileSettings() {
 
 function mobileLogout() {
     closeForm()
+    if (history.state !== '1') history.go(-1)
     logOut()
 }
 
