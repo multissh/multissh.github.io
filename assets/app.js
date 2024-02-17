@@ -88,7 +88,7 @@ function setColorBtn() {
 }
 
 async function fetchData(path, url, token) {
-    const res = await fetch(`http://${server_ip}/${path}?url=${url}&token=${token}&key=${api_key}`)
+    const res = await fetch(`https://${server_ip}/${path}?url=${url}&token=${token}&key=${api_key}`)
     if (!res.ok) return null
     return await res.text()
 }
