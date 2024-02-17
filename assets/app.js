@@ -87,23 +87,19 @@ function setColorBtn() {
     terminal_input.style.height = terminal_input.scrollHeight + 'px'
 }
 
-function fetchData(path, url, token) {
-    const xhr = new XMLHttpRequest()
-    try {
-        xhr.open('GET', `https://${server_ip}/${path}?url=${url}&token=${token}&key=${api_key}`, false)
-        xhr.send()
-        if (xhr.status === 200) return xhr.responseText
-    } catch {}
-    return null
+async function fetchData(path, url, token) {
+    const res = await fetch(`http://${server_ip}/${path}?url=${url}&token=${token}&key=${api_key}`)
+    if (!res.ok) return null
+    return await res.text()
 }
 
-function getData(url) {
+async function getData(url) {
     const token = localStorage.getItem(`${url}_token`)
     const api_url = localStorage.getItem(`${url}_url`)
     if (!api_url) return {}
     const res = localStorage.getItem(url)
     if (!res || res === '{}') {
-        const data = fetchData(url, api_url, token)
+        const data = await fetchData(url, api_url, token)
         if (!data || data === '404: Not Found') return {}
         const items = data.split('\n\n')
         const result = {}
@@ -309,9 +305,9 @@ function snippetsHtml() {
     return '<li></li>'
 }
 
-function updatePage() {
-    server_data = getData('server')
-    snippets_data = getData('snippets')
+async function updatePage() {
+    server_data = await getData('server')
+    snippets_data = await getData('snippets')
     document.querySelector('#profile-name').innerHTML = username
     all_data_list.innerHTML = sshHtml()
 }
@@ -364,7 +360,7 @@ function editSnippets(e) {
     history.replaceState('2', null, '#editsnippet')
 }
 
-function postData(url, e) {
+async function postData(url, e) {
     const formData = new FormData(e)
     if (url === 'update_profile') {
         username = formData.get('profile-input-name')
@@ -378,13 +374,13 @@ function postData(url, e) {
         localStorage.setItem('server_token', formData.get('server-input-header'))
         localStorage.setItem('server_url', formData.get('server-input-host'))
         localStorage.removeItem('server')
-        server_data = getData('server')
+        server_data = await getData('server')
         all_data_list.innerHTML = serverHtml()
     } else {
         localStorage.setItem('snippets_token', formData.get('snippets-input-header'))
         localStorage.setItem('snippets_url', formData.get('cmd'))
         localStorage.removeItem('snippets')
-        snippets_data = getData('snippets')
+        snippets_data = await getData('snippets')
         all_data_list.innerHTML = snippetsHtml()
     }
     history.back()
