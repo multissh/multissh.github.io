@@ -306,7 +306,9 @@ function snippetsHtml() {
 }
 
 async function updatePage() {
+    localStorage.removeItem('server')
     server_data = await getData('server')
+    localStorage.removeItem('snippets')
     snippets_data = await getData('snippets')
     document.querySelector('#profile-name').innerHTML = username
     all_data_list.innerHTML = sshHtml()
